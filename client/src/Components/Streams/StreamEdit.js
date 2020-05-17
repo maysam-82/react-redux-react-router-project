@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchStream } from '../../actions';
+class StreamEdit extends Component {
+	componentDidMount() {
+		// While user directly request this page, according to react-router component should fetch data again in its scope.
+		this.props.fetchStream(this.props.match.params.id);
+	}
 
-const StreamEdit = (props) => {
-	console.log(props.stream);
-	return <div>Stream Edit</div>;
-};
+	render() {
+		return <div>Stream Edit</div>;
+	}
+}
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -12,4 +18,4 @@ const mapStateToProps = (state, ownProps) => {
 	};
 };
 
-export default connect(mapStateToProps)(StreamEdit);
+export default connect(mapStateToProps, { fetchStream })(StreamEdit);

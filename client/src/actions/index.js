@@ -31,7 +31,7 @@ export const fetchStreams = () => async (dispatch) => {
 	});
 };
 export const fetchStream = (streamId) => async (dispatch) => {
-	const response = await axios.get(`/streams/:${streamId}`);
+	const response = await axios.get(`/streams/${streamId}`);
 	dispatch({
 		type: actionTypes.FETCH_STREAM,
 		payload: response.data,

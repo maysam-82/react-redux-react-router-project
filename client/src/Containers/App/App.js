@@ -15,6 +15,9 @@ class App extends Component {
 				{/* To avoid getting error while adding our history object, we should replace BrowserRouter with Plain Router (Router)
 				Anytime we pass history props into Router, react-dom will use it instead of default implementation
 				*/}
+				{/* Important Note: 
+				With React-Router, each component needs to be created to work on its own and fetch its own data if needed.
+				*/}
 				<Router history={history}>
 					<div>
 						<Header />
