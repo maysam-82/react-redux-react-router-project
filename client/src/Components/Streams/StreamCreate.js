@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
 class StreamCreate extends Component {
 	// `formProps`  is props which has come from redux-form and container value and event handler such as onChange which we used in React without redux.
 	// meta prop object contains error message and some other properties.
@@ -26,7 +28,9 @@ class StreamCreate extends Component {
 	};
 	// `handleSubmit` will take care of event object in Redux-Form.
 	// formValues or whatever value exits inside form element inputs.
-	onSubmitFormHandler = (formValues) => {};
+	onSubmitFormHandler = (formValues) => {
+		this.props.createStream(formValues);
+	};
 	render() {
 		return (
 			// to show errors we need to add Semantic UI error class to the form; otherwise, it will be hidded by default.
@@ -62,7 +66,9 @@ const validate = (formValues) => {
 	return error;
 };
 
-export default reduxForm({
+const withReduxForm = reduxForm({
 	form: 'streamCreate',
 	validate,
 })(StreamCreate);
+
+export default connect(null, { createStream })(withReduxForm);
