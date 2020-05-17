@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import StreamList from '../../Components/Streams/StreamList';
 import StreamCreate from '../../Components/Streams/StreamCreate';
 import StreamDelete from '../../Components/Streams/StreamDelete';
 import StreamEdit from '../../Components/Streams/StreamEdit';
 import StreamShow from '../../Components/Streams/StreamShow';
 import Header from '../../Components/Header/Header';
+import history from '../../history';
 
 class App extends Component {
 	render() {
 		return (
 			<div className="ui container">
-				<BrowserRouter>
+				{/* To avoid getting error while adding our history object, we should replace BrowserRouter with Plain Router (Router)
+				Anytime we pass history props into Router, react-dom will use it instead of default implementation
+				*/}
+				<Router history={history}>
 					<div>
 						<Header />
 						<Route path="/" exact component={StreamList}></Route>
@@ -24,7 +28,7 @@ class App extends Component {
 						<Route path="/streams/edit" exact component={StreamEdit}></Route>
 						<Route path="/streams/show" exact component={StreamShow}></Route>
 					</div>
-				</BrowserRouter>
+				</Router>
 			</div>
 		);
 	}
