@@ -11,8 +11,10 @@ export const signOut = () => {
 		type: actionTypes.SIGN_OUT,
 	};
 };
-export const createStream = (formValues) => async (dispatch) => {
-	const response = await axios.post('/streams', formValues);
+// redux-thunk can return store object by passing `getState` method. We can use this to get userId from auth object in state.
+export const createStream = (formValues) => async (dispatch, getState) => {
+	const { userId } = getState().auth;
+	const response = await axios.post('/streams', { ...formValues, userId });
 	dispatch({
 		type: actionTypes.CREATE_STREAM,
 		payload: response.data,
