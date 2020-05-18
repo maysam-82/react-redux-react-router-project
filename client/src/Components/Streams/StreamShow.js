@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// flv will download the video stream and convert it to some file that can be played inside normal html video player.
 import flv from 'flv.js';
 import { fetchStream } from '../../actions/index';
 
@@ -9,7 +10,26 @@ class StreamShow extends Component {
 		this.videoRef = React.createRef();
 	}
 	componentDidMount() {
-		this.props.fetchStream(this.props.match.params.id);
+		const { id } = this.props.match.params;
+		this.props.fetchStream(id);
+		this.buildPlayer();
+	}
+	componentDidUpdate() {
+		// When the component fetch the stream in the future successfully
+		this.buildPlayer();
+	}
+
+	buildPlayer() {
+		if (this.player || !this.props.stream) {
+			return;
+		}
+		const { id } = this.props.match.params;
+		this.player = flv.createPlayer({
+			type: 'flv',
+			url: `http://localhost:8000/live/${id}.flv`,
+		});
+		this.player.attachMediaElement(this.videoRef.current);
+		this.player.load();
 	}
 
 	render() {
