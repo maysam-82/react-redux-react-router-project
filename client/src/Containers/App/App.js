@@ -24,7 +24,7 @@ class App extends Component {
 						<Route path="/" exact component={StreamList}></Route>
 						<Route path="/streams/new" exact component={StreamCreate}></Route>
 						<Route
-							path="/streams/delete"
+							path="/streams/delete/:id"
 							exact
 							component={StreamDelete}
 						></Route>

@@ -38,11 +38,12 @@ export const fetchStream = (streamId) => async (dispatch) => {
 	});
 };
 export const deleteStreams = (streamId) => async (dispatch) => {
-	await axios.get(`/streams/:${streamId}`);
+	await axios.delete(`/streams/${streamId}`);
 	dispatch({
 		type: actionTypes.DELETE_STREAM,
 		payload: streamId,
 	});
+	history.push('/');
 };
 export const editStream = (streamId, streamValues) => async (dispatch) => {
 	console.log(streamId, streamValues);
