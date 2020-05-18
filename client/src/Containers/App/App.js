@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import StreamList from '../../Components/Streams/StreamList';
 import StreamCreate from '../../Components/Streams/StreamCreate';
 import StreamDelete from '../../Components/Streams/StreamDelete';
@@ -21,19 +21,22 @@ class App extends Component {
 				<Router history={history}>
 					<div>
 						<Header />
-						<Route path="/" exact component={StreamList}></Route>
-						<Route path="/streams/new" exact component={StreamCreate}></Route>
-						<Route
-							path="/streams/delete/:id"
-							exact
-							component={StreamDelete}
-						></Route>
-						<Route
-							path="/streams/edit/:id"
-							exact
-							component={StreamEdit}
-						></Route>
-						<Route path="/streams/show" exact component={StreamShow}></Route>
+						<Switch>
+							{/* Switch will look at all following Routes and only show one of them and it will not render other Routes below that one. */}
+							<Route path="/" exact component={StreamList}></Route>
+							<Route path="/streams/new" exact component={StreamCreate}></Route>
+							<Route
+								path="/streams/delete/:id"
+								exact
+								component={StreamDelete}
+							></Route>
+							<Route
+								path="/streams/edit/:id"
+								exact
+								component={StreamEdit}
+							></Route>
+							<Route path="/streams/:id" exact component={StreamShow}></Route>
+						</Switch>
 					</div>
 				</Router>
 			</div>
