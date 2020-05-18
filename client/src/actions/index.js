@@ -45,9 +45,12 @@ export const deleteStreams = (streamId) => async (dispatch) => {
 	});
 };
 export const editStream = (streamId, streamValues) => async (dispatch) => {
-	const response = await axios.put(`/streams/:${streamId}`, streamValues);
+	console.log(streamId, streamValues);
+	// put method overwrites update key value pairs and remove properties that are not in the values payload while patch method only update properties that come from payload and do not remove untouched items.
+	const response = await axios.patch(`/streams/${streamId}`, streamValues);
 	dispatch({
 		type: actionTypes.EDIT_STREAM,
 		payload: response.data,
 	});
+	history.push('/');
 };
